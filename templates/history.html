@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scan History — DeepShield</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <nav>
+    <span class="logo">DeepShield</span>
+    <a href="/">Upload</a>
+  </nav>
+
+  <main>
+    <div class="card">
+      <h2>Scan History</h2>
+
+      {% if scans %}
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Filename</th>
+            <th>Type</th>
+            <th>Result</th>
+            <th>Confidence</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for scan in scans %}
+          <tr>
+            <td>{{ scan[0] }}</td>
+            <td>{{ scan[1] }}</td>
+            <td>{{ scan[2] }}</td>
+            <td>
+              <span class="badge {{ scan[3] | lower }}">
+                {{ scan[3] }}
+              </span>
+            </td>
+            <td>{{ '%.1f' | format(scan[4] * 100) }}%</td>
+            <td>{{ scan[5] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% else %}
+        <p>No scans yet.
+          <a href="/">Upload a file</a> to get started.
+        </p>
+      {% endif %}
+    </div>
+  </main>
+
+</body>
+</html>

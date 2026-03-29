@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scan Result — DeepShield</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <nav>
+    <span class="logo">DeepShield</span>
+    <a href="/history">View History</a>
+  </nav>
+
+  <main>
+    <div class="card">
+      <h2>Scan Result</h2>
+      <p class="filename">{{ filename }}</p>
+
+      {% if result == 'FAKE' %}
+        <div class="result-badge fake">DEEPFAKE DETECTED</div>
+        <div class="alert alert-error">
+          <strong>Warning!</strong> This {{ file_type }} appears
+          to be AI-generated or manipulated.
+          Your post has been blocked.
+        </div>
+      {% else %}
+        <div class="result-badge real">GENUINE CONTENT</div>
+        <div class="alert alert-success">
+          <strong>All clear!</strong> This {{ file_type }} appears
+          to be authentic. Post published.
+        </div>
+      {% endif %}
+
+      <div class="confidence-bar-wrap">
+        <label>Confidence: {{ percent }}</label>
+        <div class="confidence-bar">
+          <div class="confidence-fill {{ result | lower }}"
+               style="width: {{ percent }}"></div>
+        </div>
+      </div>
+<!-- Ensemble Model Scores -->
+<div class="bio-section">
+  <h3>AI Model Scores</h3>
+  <div class="bio-grid">
+    <div class="bio-card">
+      <div class="bio-icon">🧠</div>
+      <div class="bio-label">EfficientNet</div>
+      <div class="bio-result">Fake score: {{ efficientnet_score }}</div>
+    </div>
+    <div class="bio-card">
+      <div class="bio-icon">🔬</div>
+      <div class="bio-label">ResNet50</div>
+      <div class="bio-result">Fake score: {{ resnet_score }}</div>
+    </div>
+    <div class="bio-card">
+      <div class="bio-icon">📊</div>
+      <div class="bio-label">SVM</div>
+      <div class="bio-result">Fake score: {{ svm_score }}</div>
+    </div>
+  </div>
+</div>
+      <!-- Biometric Checkpoints -->
+      <div class="bio-section">
+        <h3>Biometric Analysis</h3>
+        <div class="bio-grid">
+          <div class="bio-card">
+            <div class="bio-icon">👁</div>
+            <div class="bio-label">Eye Analysis</div>
+            <div class="bio-result">{{ eye_analysis }}</div>
+          </div>
+          <div class="bio-card">
+            <div class="bio-icon">🎨</div>
+            <div class="bio-label">Skin Texture</div>
+            <div class="bio-result">{{ skin_analysis }}</div>
+          </div>
+          <div class="bio-card">
+            <div class="bio-icon">📐</div>
+            <div class="bio-label">Face Geometry</div>
+            <div class="bio-result">{{ face_geometry }}</div>
+          </div>
+          <div class="bio-card">
+            <div class="bio-icon">🔍</div>
+            <div class="bio-label">Frequency</div>
+            <div class="bio-result">{{ frequency }}</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="/" class="btn-primary">Scan Another File</a>
+      <a href="/history" class="btn-secondary">View History</a>
+    </div>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+venv/
+__pycache__/
+*.pyc
+*.pth
+deepshield.db
+uploads/
+real_and_fake_face/
+real_and_fake_face_detection/
+.vscode/
+*.jpg
+*.jpeg
+*.png
+*.mp4

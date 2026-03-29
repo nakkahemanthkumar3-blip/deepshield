@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeepShield</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <nav>
+    <span class="logo">DeepShield</span>
+    <a href="/history">View History</a>
+  </nav>
+
+  <main>
+    <div class="card">
+      <h1>Post Content</h1>
+      <p class="subtitle">Your content will be scanned for AI
+         manipulation before posting.</p>
+
+      {% if error %}
+        <div class="alert alert-error">{{ error }}</div>
+      {% endif %}
+
+      <form action="/scan" method="POST"
+            enctype="multipart/form-data">
+        <label class="upload-area" for="file-input">
+          <div class="upload-icon">+</div>
+          <p>Click to select a photo or video</p>
+          <p class="hint">JPG, PNG, MP4 — max 100MB</p>
+        </label>
+        <input id="file-input" type="file" name="file"
+               accept=".jpg,.jpeg,.png,.mp4">
+        <div id="file-name" class="file-name"></div>
+        <button type="submit" class="btn-primary">
+          Scan & Post
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <script src="/static/main.js"></script>
+</body>
+</html>
